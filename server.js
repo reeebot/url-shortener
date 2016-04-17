@@ -31,7 +31,11 @@ app.get('/*', function(req, res) {                      ////// compute the reque
         }
     }
     else if (Number.isInteger(+split[0])) {	        	////// request is an existing entry
-        var query = new Query(random, split)                    //query database with request
+        var query = new Query(random, split, function(cb){
+            console.log(cb)
+            var cb0 = cb[0]
+            console.log(cb0)
+        })                    //query database with request
         
         //if request exists, redirect to stored url
         
