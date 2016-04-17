@@ -1,5 +1,5 @@
 var mongo = require('mongodb').MongoClient;
-var url = 'mongodb://localhost:27017/';
+var url = 'mongodb://ds011291.mlab.com:11291/heroku_x1m61d7m/';
 
 module.exports = function Query(random, split, cb){
     mongo.connect(url, function(err, db) {

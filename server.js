@@ -15,7 +15,7 @@ app.get('/*', function(req, res) {                      ////// compute the reque
     var cleanreq = requrl.replace(/^\//g, '');          	    // remove first forward slash/
     var split = cleanreq.split(/\/(.+)/, 2);	                // split into array of two after the first forward slash/ if present
 
-    if (split[0] === "new") {					        ////// request is a new entry
+    if (split[0] === "new") {                           ////// request is a new entry
         if (validator.isURL(split[1])){                         //checks if valid URL format
             var random = Math.floor(Math.random()*9000) + 1000; // create random 4 digit number
             var input = new Input(random, split);               // input to database: random & split[1]  (assumes random number doesn't already exist in database, will overwrite previous entry if it exists)
