@@ -17,41 +17,40 @@ app.get('/*', function(req, res) {                      ////// compute the reque
 
     if (split[0] === "new") {					        ////// request is a new entry
         if (validator.isURL(split[1])){                         //checks if valid URL format
-        var random = Math.floor(Math.random()*9000) + 1000;     // create random 4 digit number
-        var input = new Input(random, split);                   // input to database: random & split[1]  (assumes random number doesn't already exist in database, will overwrite previous entry if it exists)
-		var jsonresponse = {                                    // display original and short urls to user
-            original_url : split[1],
-            short_url : "http://rebot-fcc-third.herokuapp.com/" + random
+            var random = Math.floor(Math.random()*9000) + 1000; // create random 4 digit number
+            var input = new Input(random, split);               // input to database: random & split[1]  (assumes random number doesn't already exist in database, will overwrite previous entry if it exists)
+            var jsonresponse = {                                // display original and short urls to user
+                original_url : split[1],
+                short_url : 'http://'+req.headers.host+'/'+random
             }
+            res.send(JSON.stringify(jsonresponse))
         }
         else {                                                  //invalid URL format
             var jsonresponse = {
                 error : "Invalid URL Format."
             }
+            res.send(JSON.stringify(jsonresponse))
         }
     }
-    else if (Number.isInteger(+split[0])) {	        	////// request is an existing entry
-        var query = new Query(random, split, function(cb){
-            console.log(cb)
-            var cb0 = cb[0]
-            console.log(cb0)
-        })                    //query database with request
-        
-        //if request exists, redirect to stored url
-        
-        //if request doesn't exist:
-            //var jsonresponse = {
-            //    error : "This URL is not in the database."
-            //}
-            
-		//res.send("redirecting...")
+    else if (Number.isInteger(+split[0])) {	        	////// request is a number
+        var query = new Query(random, split, function(cb){      //query database with request
+            if (cb[0] === undefined) {                          //if request doesn't exist
+                var jsonresponse = {
+                    error : "This URL is not in the database."
+                }
+                res.send(JSON.stringify(jsonresponse))
+            }
+            else {                                              //if request exists, redirect to stored url
+                res.redirect(cb[0].original_url)
+            }
+        })
     }
     else {									        	////// invalid request
     	var jsonresponse = {
-    		error : "Invalid request. Please try again."
+    		error : "Invalid request. Please check syntax and try again."
     	}
+    	res.send(JSON.stringify(jsonresponse))
     }
-    res.send(JSON.stringify(jsonresponse))
 });
 
 app.listen(port, function() {                           ////// start server
