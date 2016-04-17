@@ -1,11 +1,14 @@
 {
   "name": "url-shortener",
   "version": "1.0.0",
-  "description": "Url Shortener Microservice",
+  "description": "URL Shortener Microservice",
   "main": "server.js",
   "dependencies": {
     "express": "^4.13.4",
-    "moment": "^2.12.0"
+    "mongodb": "^2.1.16",
+    "validator": "^5.2.0",
+    "moment": "^2.12.0",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {},
   "scripts": {
@@ -17,9 +20,10 @@
     "url": "git+https://github.com/reeebot/url-shortener.git"
   },
   "keywords": [
-    "url-shortener",
     "express",
-    "node"
+    "node",
+    "mongodb",
+    "url-shortener"
   ],
   "author": "Tim Meijome",
   "license": "ISC",
