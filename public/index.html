@@ -14,6 +14,7 @@
                 <ul>1) I can pass a URL as a parameter and I will receive a shortened URL in the JSON response.</ul>
                 <ul>2) If I pass an invalid URL that doesn't follow the valid http://www.example.com format, the JSON response will contain an error instead.</ul>
                 <ul>3) When I visit that shortened URL, it will redirect me to my original link.</ul>
+                <ul>4) If the long URL already exists in database, returns that original value and does not create multiple same entries.**</ul>
             </blockquote>
             <h3>Example creation usage:</h3>
             <code>https://rebot-fcc-third.herokuapp.com/new/http://foo.com:80</code>
